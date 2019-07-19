@@ -5,8 +5,12 @@ export default class ChuckService {
        this.client = new Chuck();
     }
 
-    getRandomJoke () {
-        return this.client.getRandomJoke()
+    getRandomJoke (category = '') {
+        return this.client.getRandomJoke(category)
+    }
+
+    getJokeCategories () {
+        return this.client.getJokeCategories()
     }
 
 }

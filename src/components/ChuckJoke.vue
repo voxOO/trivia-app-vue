@@ -1,6 +1,13 @@
 <template>
     <div>
-        <h1>{{ joke.value }}</h1>
+        <input 
+            type="text"
+            v-model="category"
+        >
+        <button @click="getRandomJoke(category)">Get New Joke</button>
+        <h4>Choose one of the categories below:</h4>
+        <h4> {{ categories }} </h4>
+        <h3>{{ joke }}</h3>
     </div>
 </template>
 
@@ -8,18 +15,25 @@
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
+    data() {
+        return {
+            category: ''
+        }
+    },
     computed:{
         ...mapGetters({
-            joke: 'getJoke'
+            joke: 'getJoke',
+            categories: 'getCategories'
         })
     },
     methods: {
         ...mapActions({
-            getRandomJoke: 'getRandomJoke'
-        })
+            getRandomJoke: 'getRandomJoke',
+            getJokeCategories: 'getJokeCategories'
+        }),
     },
     created () {
-        
+       this.getJokeCategories(); 
     },
     beforeRouteEnter (to , from , next) {
         next( vm => {
